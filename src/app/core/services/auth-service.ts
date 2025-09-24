@@ -1,23 +1,31 @@
 import { Injectable } from '@angular/core';
-import {createClient, Session, SupabaseClient, User} from '@supabase/supabase-js';
-import {environment} from '../../../environments/environment.development';
-import {UserModel} from '../model/user-model';
+import { createClient, Session, SupabaseClient, User } from '@supabase/supabase-js';
+import { environment } from '../../../environments/environment.development';
+import { UserModel } from '../model/user-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private supabase:SupabaseClient;
-  public authUser:User | null = null;
-  public session:Session | null = null;
-  public appUser:UserModel | null = null;
-  // إضافة flag لتجنب التكرار
+  private supabase: SupabaseClient;
+  public authUser: User | null = null;
+  public session: Session | null = null;
+  public appUser: UserModel | null = null;
   private isManualSignIn = false;
 
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+
+    // 🟢 حاول تقرأ session من localStorage عند تشغيل التطبيق
+    const storedSession = localStorage.getItem('supabase_session');
+    if (storedSession) {
+      const parsed = JSON.parse(storedSession) as Session;
+      this.session = parsed;
+      this.authUser = parsed.user ?? null;
+    }
+
+    // 🟢 استمع لأي تغيير في حالة الـ Auth
     this.supabase.auth.onAuthStateChange(async (event, session) => {
-      // إذا كانت العملية يدوية، نتخطى التحميل التلقائي
       if (this.isManualSignIn) {
         this.isManualSignIn = false;
         return;
@@ -27,8 +35,11 @@ export class AuthService {
       this.authUser = session?.user ?? null;
 
       if (this.authUser) {
+        // خزّن session في localStorage
+        localStorage.setItem('supabase_session', JSON.stringify(session));
         await this.loadAppUser(this.authUser.id);
       } else {
+        localStorage.removeItem('supabase_session');
         this.appUser = null;
       }
     });
@@ -37,11 +48,9 @@ export class AuthService {
   async signIn(username: string, password: string) {
     const email = `nesma2357@gmail.com`;
 
-    // تعيين flag أن هذه عملية يدوية
     this.isManualSignIn = true;
 
     const { data, error } = await this.supabase.auth.signInWithPassword({ email, password });
-
     console.log('SIGN IN RESPONSE:', { data, error });
 
     if (error) throw error;
@@ -50,30 +59,27 @@ export class AuthService {
     this.authUser = data.user ?? null;
 
     if (this.authUser) {
-      console.log('Auth user exists, loading AppUser...');
+      // خزّن session في localStorage
+      localStorage.setItem('supabase_session', JSON.stringify(data.session));
       await this.loadAppUser(this.authUser.id);
     }
 
-    console.log('Returning from signIn...');
     return data;
   }
-
-
 
   async signOut() {
     await this.supabase.auth.signOut();
     this.session = null;
     this.authUser = null;
     this.appUser = null;
+
+    // 🟢 امسح session من localStorage
+    localStorage.removeItem('supabase_session');
   }
 
-
-
-
-
-  private async loadAppUser(authId:string) {
+  private async loadAppUser(authId: string) {
     console.log('Loading App User for authId:', authId);
-    const {data, error} = await this.supabase
+    const { data, error } = await this.supabase
       .from('users')
       .select('*')
       .eq('auth_id', authId)
@@ -85,12 +91,10 @@ export class AuthService {
       return;
     }
 
-    console.log('Loaded App User:', data);
     this.appUser = data;
   }
 
   getToken(): string | null {
     return this.session?.access_token ?? null;
   }
-
 }
