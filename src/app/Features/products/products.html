@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="title">Our Delicious Creations</h1>
+  <p class="subtitle">Each item is lovingly crafted with the finest ingredients, bringing you the perfect blend of
+    tradition and innovation.</p>
+  <div class="filter-bar">
+    <button [class.active]="selectedCategory === 'all'" (click)="filterProducts('all')">All Products</button>
+    <button [class.active]="selectedCategory === 'bread'" (click)="filterProducts('bread')">Fresh Bread</button>
+    <button [class.active]="selectedCategory === 'pastries'" (click)="filterProducts('pastries')">Pastries</button>
+    <button [class.active]="selectedCategory === 'cakes'" (click)="filterProducts('cakes')">Cakes</button>
+    <button [class.active]="selectedCategory === 'cookies'" (click)="filterProducts('cookies')">Cookies</button>
+  </div>
+
+  <div class="product-list">
+    @for (product of filteredProducts; track $index) {
+      <div class="product-card" appProductAnimation>
+        <img [src]="product.image" alt="{{product.name}}">
+        <h3>{{product.name}}</h3>
+        <p class="price">${{product.price}}</p>
+        <p class="description">{{product.description}}</p>
+        <button class="view-recipe">View Recipe</button>
+      </div>
+    }
+  </div>
+</div>
