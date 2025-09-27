@@ -1,0 +1,8 @@
+/* لا يوجد تخصيص كبير هنا، نعتمد على Bootstrap */
+header {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.navbar-brand .fa-box-open {
+  color: #ff6f00; /* لون مخصص */
+}

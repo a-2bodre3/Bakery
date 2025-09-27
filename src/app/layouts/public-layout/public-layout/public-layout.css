@@ -1,0 +1,19 @@
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+  color: #6c757d;
+  border: none;
+  background: none;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: #f8f9fa;
+  border-bottom-color: #007bff;
+}

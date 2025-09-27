@@ -1,0 +1,18 @@
+/* Footer background and text color */
+.bg-footer {
+  background-color: #8b4513; /* Custom brown */
+  color: white;
+}
+
+/* Logo styling */
+.footer-logo {
+  font-family: 'Segoe Script', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Footer links hover effect */
+.footer a:hover {
+  text-decoration: underline;
+  color: #ffc107;
+}

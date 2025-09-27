@@ -1,0 +1,10 @@
+/* تخصيص الألوان الخفيفة للأيقونات */
+.text-primary-light {
+  color: #adb5bd; /* لون رمادي فاتح */
+}
+.text-success-light {
+  color: #adb5bd;
+}
+.text-warning-light {
+  color: #adb5bd;
+}

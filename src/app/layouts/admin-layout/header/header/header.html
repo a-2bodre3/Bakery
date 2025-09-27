@@ -1,0 +1,47 @@
+<header class="header shadow-sm sticky-top">
+  <div class="container d-flex align-items-center justify-content-between py-2">
+    <!-- Logo -->
+    <div class="logo d-flex align-items-center">
+      <i class="bi bi-cup-hot fs-4 me-2"></i>
+      <span class="brand-name">AL-Yasmin</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <button
+        class="navbar-toggler"
+        type="button"
+        (click)="toggleMenu()"
+        aria-controls="navbarNav"
+        aria-expanded="isMenuOpen"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- استخدمنا class.show -->
+      <div class="collapse navbar-collapse" id="navbarNav" [class.show]="isMenuOpen">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#"><i class="bi bi-house-door me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-box-seam me-1"></i> Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-people me-1"></i> Our Story</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-info-circle me-1"></i> About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-envelope me-1"></i> Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-gear me-1"></i> Admin</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

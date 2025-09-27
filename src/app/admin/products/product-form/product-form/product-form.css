@@ -1,0 +1,9 @@
+/* مثال على product-form.component.css */
+.img-preview-lg {
+  max-width: 250px;
+  max-height: 250px;
+  object-fit: cover; /* لضمان ملء المساحة دون تشويه */
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 4px;
+}

@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #fffdf9;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4a2e14;
+}
+
+.contact-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 32px;
+  color: #803e00;
+}
+
+.contact-section p {
+  margin-top: 10px;
+  color: #5a3e1a;
+  font-size: 16px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 800px;
+  margin: 40px auto 0;
+}
+
+.card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card h4 {
+  margin-bottom: 10px;
+  color: #a24e0d;
+  font-size: 20px;
+}
+
+.card p {
+  line-height: 1.6;
+  font-size: 15px;
+  color: #4a3b2a;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.map-placeholder {
+  background: #fbece6;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #5a2d0c;
+}
+
+/* Responsive (اختياري) */
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
