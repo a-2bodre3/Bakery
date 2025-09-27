@@ -3,24 +3,24 @@ import {FormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
 
 @Component({
-  selector: 'app-product-form',
+  selector: 'app-category-form',
   imports: [
     FormsModule,
     NgIf
   ],
-  templateUrl: './product-form.html',
-  styleUrl: './product-form.css'
+  templateUrl: './category-form.html',
+  styleUrl: './category-form.css'
 })
-export class ProductForm {
+export class CategoryForm {
   isEditMode: string | undefined;
-  product: any;
+  category: any;
   imageUrlPreview: any;
 
   onSubmit() {
 
   }
 
-  onFileSelected($event: Event, product: string) {
+  onFileSelected($event: Event, category: string) {
     
   }
 }

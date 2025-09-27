@@ -1,0 +1,51 @@
+/* Header styling */
+.header {
+  background: #fff8f0;
+  transition: background 0.3s ease-in-out;
+}
+
+.header .brand-name {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6b3e1d;
+}
+
+.nav-link {
+  color: #5a3d2b;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #d2691e;
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: #b3541e;
+  border-radius: 20px;
+  padding: 6px 14px;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+/* Animation for fade in */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  animation: fadeInDown 0.8s ease-in-out;
+}

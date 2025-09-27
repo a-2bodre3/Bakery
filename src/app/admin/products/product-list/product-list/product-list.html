@@ -1,1 +1,39 @@
-<p>product-list works!</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0 text-muted">Products Management</h5>
+  <button class="btn btn-warning d-flex align-items-center" routerLink="/admin/products/new">
+    <i class="fas fa-plus me-2"></i>
+    Add Product
+  </button>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+    <thead class="bg-light">
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Price</th>
+      <th scope="col">Featured</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><img src="path/to/image.png" alt="Sourdough" class="img-thumbnail product-img-sm"></td>
+      <td>Artisan Sourdough</td>
+      <td><span class="badge bg-info text-dark">Breads</span></td>
+      <td>$8.50</td>
+      <td><span class="badge bg-warning">Featured</span></td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-2" routerLink="/admin/products/1/edit" title="Edit">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger" title="Delete">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
