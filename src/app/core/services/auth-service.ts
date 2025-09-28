@@ -16,7 +16,6 @@ export class AuthService {
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
-    // 🟢 حاول تقرأ session من localStorage عند تشغيل التطبيق
     const storedSession = localStorage.getItem('supabase_session');
     if (storedSession) {
       const parsed = JSON.parse(storedSession) as Session;
@@ -24,7 +23,7 @@ export class AuthService {
       this.authUser = parsed.user ?? null;
     }
 
-    // 🟢 استمع لأي تغيير في حالة الـ Auth
+
     this.supabase.auth.onAuthStateChange(async (event, session) => {
       if (this.isManualSignIn) {
         this.isManualSignIn = false;
@@ -35,9 +34,8 @@ export class AuthService {
       this.authUser = session?.user ?? null;
 
       if (this.authUser) {
-        // خزّن session في localStorage
         localStorage.setItem('supabase_session', JSON.stringify(session));
-        await this.loadAppUser(this.authUser.id);
+        // await this.loadAppUser(this.authUser.id);
       } else {
         localStorage.removeItem('supabase_session');
         this.appUser = null;
@@ -59,9 +57,8 @@ export class AuthService {
     this.authUser = data.user ?? null;
 
     if (this.authUser) {
-      // خزّن session في localStorage
       localStorage.setItem('supabase_session', JSON.stringify(data.session));
-      await this.loadAppUser(this.authUser.id);
+      // await this.loadAppUser(this.authUser.id);
     }
 
     return data;
@@ -73,7 +70,7 @@ export class AuthService {
     this.authUser = null;
     this.appUser = null;
 
-    // 🟢 امسح session من localStorage
+
     localStorage.removeItem('supabase_session');
   }
 
