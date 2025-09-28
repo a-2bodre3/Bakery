@@ -6,7 +6,14 @@
   </button>
 </div>
 
-<div class="table-responsive">
+<div *ngIf="isLoading" class="text-center my-5">
+  <i class="fas fa-spinner fa-spin fa-2x text-warning"></i>
+  <p class="mt-2">Loading products...</p>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+<div class="table-responsive" *ngIf="!isLoading && !error">
   <table class="table table-hover align-middle">
     <thead class="bg-light">
     <tr>
@@ -14,26 +21,42 @@
       <th scope="col">Name</th>
       <th scope="col">Category</th>
       <th scope="col">Price</th>
-      <th scope="col">Featured</th>
       <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td><img src="path/to/image.png" alt="Sourdough" class="img-thumbnail product-img-sm"></td>
-      <td>Artisan Sourdough</td>
-      <td><span class="badge bg-info text-dark">Breads</span></td>
-      <td>$8.50</td>
-      <td><span class="badge bg-warning">Featured</span></td>
+    <tr *ngFor="let product of products">
       <td>
-        <button class="btn btn-sm btn-outline-primary me-2" routerLink="/admin/products/1/edit" title="Edit">
+        <img
+          [src]="product.image"
+          alt="{{ product.name }}"
+          class="img-thumbnail"
+          style="width: 60px; height: 60px; object-fit: cover;">
+      </td>
+      <td>{{ product.name }}</td>
+      <td>
+        <span class="badge bg-info text-dark">{{ product.categoryName }}</span>
+      </td>
+      <td>{{ product.price }}</td>
+      <td>
+        <button
+          class="btn btn-sm btn-outline-primary me-2"
+          [routerLink]="['/admin/product/edit', product.id]"
+          title="Edit">
           <i class="fas fa-edit"></i>
         </button>
-        <button class="btn btn-sm btn-outline-danger" title="Delete">
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="onDelete(product.id)"
+          title="Delete">
           <i class="fas fa-trash-alt"></i>
         </button>
       </td>
     </tr>
     </tbody>
   </table>
+
+  <div *ngIf="products.length === 0 && !isLoading" class="alert alert-info text-center">
+    No products found.
+  </div>
 </div>

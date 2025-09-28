@@ -13,7 +13,7 @@ import { ProductAnimation } from "../../shared/directives/product-animation";
   styleUrl: './products.css'
 })
 export class Products {
-  
+
   categoryService!: CategoryService;
   productService!: ProductService;
 
@@ -22,7 +22,7 @@ export class Products {
   filteredProducts!: ProductModel[];
 
   selectedCategory: string = 'all';
-  
+
   async ngOnInit() {
     this.categories = await this.categoryService.getAllCategories();
     this.products = await this.productService.getAll();
@@ -34,7 +34,7 @@ export class Products {
     if (category === 'all') {
       this.filteredProducts = [...this.products];
     } else {
-      this.filteredProducts = this.products.filter(product => product.categoryId === category);
+      this.filteredProducts = this.products.filter(product => product.category_id === category);
     }
   }
 }
